@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cifrado de Transposición Usando Variante JavaScript</title>
+  <style>
+    .centered-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .title {
+      color: #007BFF; /* Color azul */
+    }
+
+    .subtitle {
+      color: #28a745; /* Color verde */
+    }
+
+    .cipher-container {
+      background-color: #f8f9fa; /* Color gris claro */
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .btn-cifrar {
+      background-color: #007BFF; /* Color azul */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+    }
+
+    .btn-descifrar {
+      background-color: #dc3545; /* Color rojo */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+    }
+
+    .result {
+      background-color: #e9ecef; /* Color gris claro */
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="centered-content">
+      <h1 class="title">Carlos Ezequiel Meyer Medina 7B</h1>
+      <div class="cipher-container">
+        <h1 class="subtitle">Cifrado de Transposición Usando Variante JavaScript</h1>
+        <div>
+          <label for="inputText">Mensaje:</label>
+          <input id="inputText" v-model="inputText" />
+        </div>
+        <div>
+          <label for="shift">Desplazamiento:</label>
+          <input id="shift" type="number" v-model="shift" />
+        </div>
+        <button @click="encrypt" class="btn-cifrar">Cifrar</button>
+        <button @click="decrypt" class="btn-descifrar">Descifrar</button>
+        <div>
+          <h2>Resultado:</h2>
+          <p class="result">{{ result }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        inputText: "",
+        shift: 0,
+        result: ""
+      },
+      methods: {
+        encrypt: function () {
+          this.result = CryptoJS.AES.encrypt(this.inputText, this.shift.toString()).toString();
+        },
+        decrypt: function () {
+          this.result = CryptoJS.AES.decrypt(this.result, this.shift.toString()).toString(CryptoJS.enc.Utf8);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
